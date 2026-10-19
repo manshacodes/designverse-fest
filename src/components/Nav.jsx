@@ -2,9 +2,8 @@ import { useState } from "react";
 import "./Nav.css";
 
 const LINKS = [
-  { href: "#overview", label: "Overview" },
-  { href: "#highlights", label: "Highlights" },
-  { href: "#register", label: "Register" },
+  { href: "#highlights", label: "The two days" },
+  { href: "#register", label: "Pass" },
 ];
 
 export default function Nav() {
@@ -14,10 +13,10 @@ export default function Nav() {
     <header className="nav">
       <div className="nav__inner">
         <a href="#top" className="nav__mark">
-          DESIGN<span>VERSE</span>
+          DESIGNVERSE
         </a>
 
-        <nav className="nav__links nav__links--desktop" aria-label="Primary">
+        <nav className="nav__links" aria-label="Primary">
           {LINKS.map((l) => (
             <a key={l.href} href={l.href}>
               {l.label}
@@ -25,8 +24,8 @@ export default function Nav() {
           ))}
         </nav>
 
-        <a href="#register" className="nav__cta nav__cta--desktop">
-          Get a ticket
+        <a href="#register" className="nav__cta">
+          Claim your pass
         </a>
 
         <button
@@ -39,25 +38,17 @@ export default function Nav() {
         >
           <span />
           <span />
-          <span />
         </button>
       </div>
 
-      <div
-        id="mobile-menu"
-        className={`nav__mobile ${open ? "is-open" : ""}`}
-      >
+      <div id="mobile-menu" className={`nav__mobile ${open ? "is-open" : ""}`}>
         {LINKS.map((l) => (
           <a key={l.href} href={l.href} onClick={() => setOpen(false)}>
             {l.label}
           </a>
         ))}
-        <a
-          href="#register"
-          className="nav__cta"
-          onClick={() => setOpen(false)}
-        >
-          Get a ticket
+        <a href="#register" className="nav__cta" onClick={() => setOpen(false)}>
+          Claim your pass
         </a>
       </div>
     </header>

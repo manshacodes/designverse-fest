@@ -1,0 +1,58 @@
+.annot {
+  position: relative;
+  display: inline-block;
+  transform: rotate(-3deg);
+  pointer-events: none;
+  user-select: none;
+}
+
+.annot__text {
+  display: block;
+  white-space: nowrap;
+}
+
+.annot__mark {
+  position: absolute;
+  overflow: visible;
+}
+
+.annot--se .annot__mark {
+  width: 58px;
+  height: 48px;
+  left: calc(100% - 4px);
+  top: calc(100% - 6px);
+}
+
+.annot--sw .annot__mark {
+  width: 58px;
+  height: 48px;
+  right: calc(100% - 4px);
+  top: calc(100% - 6px);
+}
+
+.annot--up .annot__mark {
+  width: 40px;
+  height: 52px;
+  left: 50%;
+  bottom: calc(100% - 2px);
+  translate: -50% 0;
+}
+
+.annot--underline {
+  transform: rotate(-1.5deg);
+}
+
+.annot--underline .annot__mark {
+  width: 100%;
+  height: 13px;
+  left: 0;
+  top: calc(100% - 2px);
+}
+
+@media (max-width: 760px) {
+  .annot--se .annot__mark,
+  .annot--sw .annot__mark {
+    width: 42px;
+    height: 36px;
+  }
+}

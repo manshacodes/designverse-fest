@@ -1,0 +1,219 @@
+.pass-stage {
+  perspective: 1200px;
+  width: 100%;
+  display: flex;
+  justify-content: center;
+}
+
+.pass {
+  position: relative;
+  width: min(100%, 440px);
+  aspect-ratio: 1.6 / 1;
+  transform-style: preserve-3d;
+  will-change: transform;
+}
+
+.pass__face {
+  position: absolute;
+  inset: 0;
+  border-radius: 6px;
+  overflow: hidden;
+  background: var(--graphite);
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  padding: clamp(16px, 3.4vw, 26px);
+  box-shadow:
+    0 2px 0 rgba(255, 255, 255, 0.06) inset,
+    0 30px 60px -18px rgba(0, 0, 0, 0.9),
+    0 0 0 1px rgba(255, 255, 255, 0.05);
+}
+
+/* brushed striations */
+.pass__face::before {
+  content: "";
+  position: absolute;
+  inset: 0;
+  opacity: 0.35;
+  background: repeating-linear-gradient(
+    98deg,
+    rgba(255, 255, 255, 0.045) 0px,
+    rgba(255, 255, 255, 0.045) 1px,
+    rgba(0, 0, 0, 0.05) 1px,
+    rgba(0, 0, 0, 0.05) 3px
+  );
+  pointer-events: none;
+}
+
+.pass__face::after {
+  content: "";
+  position: absolute;
+  inset: 0;
+  opacity: 0.08;
+  background-image: var(--grain);
+  pointer-events: none;
+}
+
+.pass__sheen {
+  position: absolute;
+  inset: 0;
+  mix-blend-mode: screen;
+  pointer-events: none;
+}
+
+.pass__rim {
+  position: absolute;
+  inset: 0;
+  border-radius: 6px;
+  pointer-events: none;
+  border: 1px solid transparent;
+  background: linear-gradient(
+      160deg,
+      rgba(255, 255, 255, 0.55),
+      rgba(255, 255, 255, 0.04) 28%,
+      rgba(0, 0, 0, 0.5) 72%,
+      rgba(255, 255, 255, 0.3)
+    )
+    border-box;
+  -webkit-mask:
+    linear-gradient(#000 0 0) padding-box,
+    linear-gradient(#000 0 0);
+  -webkit-mask-composite: xor;
+  mask-composite: exclude;
+}
+
+.pass__row {
+  position: relative;
+  z-index: 2;
+  display: flex;
+  justify-content: space-between;
+  align-items: flex-start;
+  gap: 12px;
+}
+
+.pass__brand {
+  font-family: var(--font-sans);
+  font-weight: 600;
+  font-size: clamp(15px, 2.1vw, 19px);
+  letter-spacing: 0.015em;
+  text-transform: uppercase;
+  color: #eef3f4;
+  text-shadow:
+    0 1px 0 rgba(0, 0, 0, 0.8),
+    0 -1px 0 rgba(255, 255, 255, 0.18);
+}
+
+.pass__ed,
+.pass__key,
+.pass__stub-code {
+  font-family: var(--font-mono);
+  font-size: 9.5px;
+  letter-spacing: 0.16em;
+  text-transform: uppercase;
+  color: var(--silver-faint);
+}
+
+/* EMV-style chip, built from stacked metal bands */
+.pass__chip {
+  position: relative;
+  z-index: 2;
+  width: clamp(38px, 7vw, 50px);
+  height: clamp(28px, 5.2vw, 38px);
+  border-radius: 5px;
+  background: linear-gradient(
+    150deg,
+    #8c8268 0%,
+    #e6dcc0 18%,
+    #b4a989 38%,
+    #f1ead6 56%,
+    #9a8f72 76%,
+    #d8cfb3 100%
+  );
+  box-shadow:
+    inset 0 0 0 1px rgba(0, 0, 0, 0.35),
+    0 1px 2px rgba(0, 0, 0, 0.6);
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  gap: 4px;
+  padding: 0 6px;
+  margin-left: 2px;
+}
+
+.pass__chip span {
+  height: 1px;
+  background: rgba(0, 0, 0, 0.38);
+}
+
+.pass__block {
+  display: flex;
+  flex-direction: column;
+  gap: 3px;
+}
+
+.pass__val {
+  font-family: var(--font-mono);
+  font-size: clamp(10px, 1.5vw, 12px);
+  letter-spacing: 0.05em;
+  color: #cfd6d8;
+}
+
+/* tear-off stub down the right edge — ticket DNA on a metal card */
+.pass__perf {
+  position: absolute;
+  top: 0;
+  bottom: 0;
+  right: 21%;
+  width: 1px;
+  background: repeating-linear-gradient(
+    to bottom,
+    rgba(0, 0, 0, 0.75) 0 5px,
+    rgba(255, 255, 255, 0.16) 5px 10px
+  );
+  z-index: 2;
+}
+
+.pass__stub {
+  position: absolute;
+  top: 0;
+  right: 0;
+  bottom: 0;
+  width: 21%;
+  z-index: 2;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background: linear-gradient(
+    180deg,
+    rgba(255, 255, 255, 0.05),
+    rgba(0, 0, 0, 0.25)
+  );
+}
+
+.pass__stub-code {
+  writing-mode: vertical-rl;
+  letter-spacing: 0.3em;
+  color: #9aa4a7;
+}
+
+/* notches where the stub tears away */
+.pass__face > .pass__perf::before,
+.pass__face > .pass__perf::after {
+  content: "";
+  position: absolute;
+  left: 50%;
+  translate: -50% 0;
+  width: 14px;
+  height: 14px;
+  border-radius: 50%;
+  background: var(--void);
+  box-shadow: inset 0 1px 2px rgba(0, 0, 0, 0.9);
+}
+
+.pass__face > .pass__perf::before {
+  top: -7px;
+}
+
+.pass__face > .pass__perf::after {
+  bottom: -7px;
+}

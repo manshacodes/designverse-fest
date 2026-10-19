@@ -1,27 +1,77 @@
+@import "@fontsource-variable/geist";
+@import "@fontsource-variable/geist-mono";
+@import "@fontsource/caveat/600.css";
+
 :root {
-  --paper: #eae8e2;
-  --paper-deep: #e1ddd3;
-  --card: #fffbf4;
-  --ink: #17171a;
-  --ink-soft: #55525c;
-  --ink-faint: #8a8790;
-  --line: #cac5b8;
+  /* ground */
+  --void: #080808;
+  --void-lift: #0e1113;
+  --slate: #1c2227;
+  --slate-lift: #262e33;
+  --hairline: #222a2e;
+  --hairline-bright: #39444a;
 
-  --red: #e8432f;
-  --red-soft: #f6d9d2;
-  --amber: #f2b705;
-  --amber-soft: #faecb8;
-  --blue: #2447e8;
-  --blue-soft: #d9e0fb;
+  /* type */
+  --silver: #e1e5e5;
+  --silver-dim: #99a2a5;
+  --silver-faint: #5e686c;
+  --marker: #f2f5f5;
 
-  --font-display: "Bricolage Grotesque", "Segoe UI", sans-serif;
-  --font-body: "IBM Plex Sans", system-ui, sans-serif;
-  --font-mono: "IBM Plex Mono", "SFMono-Regular", monospace;
+  /* the one non-metal accent: a hot filament orange, used almost nowhere */
+  --filament: #ff5324;
 
-  --maxw: 1240px;
-  --gutter: clamp(20px, 5vw, 64px);
+  --font-sans: "Geist Variable", "Helvetica Neue", Arial, sans-serif;
+  --font-mono: "Geist Mono Variable", ui-monospace, monospace;
+  --font-hand: "Caveat", cursive;
 
-  color-scheme: light;
+  /* polished chrome — hard banding is what reads as metal */
+  --chrome: linear-gradient(
+    172deg,
+    #394044 0%,
+    #8e989d 7%,
+    #dde4e7 16%,
+    #f4f8f9 23%,
+    #a3adb2 33%,
+    #525b60 45%,
+    #2b3236 52%,
+    #6b7479 63%,
+    #c6cfd3 76%,
+    #929b9f 88%,
+    #333a3e 100%
+  );
+
+  /* brighter chrome for small text — the dark bands above swallow glyphs */
+  --chrome-bright: linear-gradient(
+    172deg,
+    #ffffff 0%,
+    #dfe7ea 22%,
+    #9ba6ab 44%,
+    #f4f8f9 62%,
+    #b6c0c4 84%,
+    #eef3f4 100%
+  );
+
+  /* dark graphite metal — for large surfaces that must stay readable */
+  --graphite: linear-gradient(
+    148deg,
+    #101416 0%,
+    #222a2e 18%,
+    #39444a 34%,
+    #1a2023 48%,
+    #2e383d 64%,
+    #171c1f 82%,
+    #0d1113 100%
+  );
+
+  --grain: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='180' height='180'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.82' numOctaves='3' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)'/%3E%3C/svg%3E");
+
+  --ease-crisp: cubic-bezier(0.16, 1, 0.3, 1);
+  --ease-cut: cubic-bezier(0.65, 0, 0.35, 1);
+
+  --maxw: 1280px;
+  --gutter: clamp(20px, 4.5vw, 72px);
+
+  color-scheme: dark;
 }
 
 * {
@@ -29,17 +79,29 @@
 }
 
 html {
-  background: var(--paper);
+  background: var(--void);
 }
 
 body {
   margin: 0;
-  background: var(--paper);
-  color: var(--ink);
-  font-family: var(--font-body);
+  background: var(--void);
+  color: var(--silver);
+  font-family: var(--font-sans);
   font-size: 16px;
-  line-height: 1.5;
+  line-height: 1.45;
   -webkit-font-smoothing: antialiased;
+  overflow-x: hidden;
+}
+
+/* film grain over everything */
+body::after {
+  content: "";
+  position: fixed;
+  inset: 0;
+  z-index: 9998;
+  pointer-events: none;
+  opacity: 0.045;
+  background-image: var(--grain);
 }
 
 img,
@@ -59,13 +121,20 @@ button {
 h1,
 h2,
 h3 {
-  font-family: var(--font-display);
-  text-wrap: balance;
   margin: 0;
+  font-weight: 500;
+  letter-spacing: -0.022em;
+  text-transform: uppercase;
+  text-wrap: balance;
 }
 
 p {
   margin: 0;
+}
+
+:focus-visible {
+  outline: 1.5px solid var(--silver);
+  outline-offset: 3px;
 }
 
 .section {
@@ -78,44 +147,39 @@ p {
   margin-inline: auto;
 }
 
-.eyebrow {
+/* small technical label, borrowed from the corner clocks on moto-card */
+.mono {
   font-family: var(--font-mono);
-  font-size: 12px;
-  letter-spacing: 0.14em;
+  font-size: 11px;
+  font-weight: 400;
+  letter-spacing: 0.08em;
   text-transform: uppercase;
-  color: var(--ink-soft);
+  color: var(--silver-faint);
 }
 
-.tag {
-  display: inline-flex;
-  align-items: center;
-  gap: 6px;
-  font-family: var(--font-mono);
-  font-size: 12.5px;
-  font-weight: 500;
+/* handwritten marker note */
+.hand {
+  font-family: var(--font-hand);
+  font-weight: 600;
+  font-size: clamp(17px, 2vw, 22px);
+  line-height: 1;
+  color: var(--marker);
   letter-spacing: 0.01em;
-  padding: 7px 13px;
-  border-radius: 100px;
-  border: 1px solid transparent;
-  white-space: nowrap;
 }
 
-.tag--amber {
-  background: var(--amber-soft);
-  color: #7a5a00;
-  border-color: #e9cf6e;
+.rule {
+  height: 1px;
+  background: var(--hairline);
+  border: 0;
+  margin: 0;
 }
 
-.tag--blue {
-  background: var(--blue-soft);
-  color: #1a3199;
-  border-color: #aebbf3;
-}
-
-.tag--red {
-  background: var(--red-soft);
-  color: #a3291a;
-  border-color: #eeb3a7;
+/* chrome-filled display type */
+.chrome-text {
+  background: var(--chrome);
+  -webkit-background-clip: text;
+  background-clip: text;
+  color: transparent;
 }
 
 @media (prefers-reduced-motion: reduce) {
@@ -125,6 +189,5 @@ p {
     animation-duration: 0.01ms !important;
     animation-iteration-count: 1 !important;
     transition-duration: 0.01ms !important;
-    scroll-behavior: auto !important;
   }
 }

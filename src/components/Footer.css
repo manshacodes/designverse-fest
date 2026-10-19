@@ -1,81 +1,65 @@
 .footer {
-  margin-top: clamp(40px, 8vw, 72px);
-  border-top: 1px solid var(--line);
-  background: var(--ink);
-  color: var(--paper);
-  padding-block: clamp(40px, 6vw, 56px) 24px;
+  border-top: 1px solid var(--hairline);
+  padding-top: clamp(44px, 6vw, 72px);
+  padding-bottom: 20px;
+  overflow: hidden;
 }
 
-.footer__inner {
+.footer__grid {
   display: grid;
-  grid-template-columns: 1.6fr 1fr 1fr 1fr;
+  grid-template-columns: repeat(4, 1fr);
   gap: 28px;
-}
-
-.footer__mark {
-  font-family: var(--font-display);
-  font-weight: 800;
-  font-size: 18px;
-}
-
-.footer__mark span {
-  color: var(--red);
-}
-
-.footer__tagline {
-  margin-top: 8px;
-  color: #b9b7bd;
-  font-size: 13.5px;
-  max-width: 28ch;
 }
 
 .footer__col {
   display: flex;
   flex-direction: column;
-  gap: 6px;
+  gap: 7px;
   font-size: 13.5px;
-  color: #d8d6da;
+  color: var(--silver-dim);
+}
+
+.footer__col .mono {
+  margin-bottom: 5px;
 }
 
 .footer__col a {
-  color: #d8d6da;
+  color: var(--silver);
   text-decoration: none;
+  width: fit-content;
+  border-bottom: 1px solid transparent;
+  transition: border-color 0.18s var(--ease-crisp);
 }
 
 .footer__col a:hover {
-  color: var(--amber);
+  border-bottom-color: var(--silver-faint);
 }
 
-.footer__heading {
-  font-family: var(--font-mono);
-  font-size: 11px;
+/* oversized chrome wordmark, bled to the edges */
+.footer__wordmark {
+  margin: clamp(40px, 7vw, 86px) 0 0;
+  font-weight: 600;
   text-transform: uppercase;
-  letter-spacing: 0.08em;
-  color: var(--ink-faint);
-  margin-bottom: 4px;
+  letter-spacing: -0.04em;
+  line-height: 0.8;
+  font-size: clamp(56px, 15.5vw, 230px);
+  white-space: nowrap;
+  user-select: none;
 }
 
-.footer__bottom {
-  margin-top: 40px;
-  padding-top: 20px;
-  border-top: 1px solid #333138;
+.footer__base {
   display: flex;
   justify-content: space-between;
-  align-items: center;
   flex-wrap: wrap;
-  gap: 12px;
-  font-size: 12.5px;
-  color: #908e95;
+  gap: 10px;
+  margin-top: clamp(20px, 3vw, 34px);
+  padding-top: 18px;
+  border-top: 1px solid var(--hairline);
 }
 
-.footer__cta {
-  color: var(--amber);
-  text-decoration: none;
-  font-family: var(--font-mono);
-}
-
-@media (max-width: 720px) {
-  .footer__inner {
+@media (max-width: 760px) {
+  .footer__grid {
     grid-template-columns: 1fr 1fr;
+    gap: 26px;
   }
 }

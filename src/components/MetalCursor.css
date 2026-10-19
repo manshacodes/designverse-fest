@@ -1,0 +1,57 @@
+.has-metal-cursor,
+.has-metal-cursor * {
+  cursor: none !important;
+}
+
+.metal-ball,
+.metal-ring {
+  position: fixed;
+  top: 0;
+  left: 0;
+  z-index: 9999;
+  pointer-events: none;
+  margin-left: -11px;
+  margin-top: -11px;
+}
+
+/* polished ball bearing: off-centre specular + hard terminator */
+.metal-ball {
+  width: 22px;
+  height: 22px;
+  border-radius: 50%;
+  background: radial-gradient(
+    circle at 33% 27%,
+    #ffffff 0%,
+    #e4ebee 9%,
+    #a9b3b8 26%,
+    #5d666b 46%,
+    #262d31 68%,
+    #0a0e10 88%,
+    #05080a 100%
+  );
+  box-shadow:
+    inset -2px -3px 7px rgba(0, 0, 0, 0.7),
+    inset 2px 2px 5px rgba(255, 255, 255, 0.38),
+    0 4px 14px rgba(0, 0, 0, 0.55);
+  transition:
+    width 0.22s var(--ease-crisp),
+    height 0.22s var(--ease-crisp),
+    margin 0.22s var(--ease-crisp);
+}
+
+.metal-ball.is-hot {
+  width: 38px;
+  height: 38px;
+  margin-left: -19px;
+  margin-top: -19px;
+}
+
+/* the precise point, no lag */
+.metal-ring {
+  width: 22px;
+  height: 22px;
+  border-radius: 50%;
+  border: 1px solid rgba(225, 229, 229, 0.5);
+  transform-origin: center;
+  scale: 0.22;
+}

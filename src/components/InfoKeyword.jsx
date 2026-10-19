@@ -2,12 +2,12 @@ import { useState } from "react";
 import { AnimatePresence, motion } from "framer-motion";
 import "./InfoKeyword.css";
 
-export default function InfoKeyword({ color = "red", stat, detail, children }) {
+export default function InfoKeyword({ stat, detail, children }) {
   const [open, setOpen] = useState(false);
 
   return (
     <span
-      className={`keyword keyword--${color}`}
+      className="keyword"
       onMouseEnter={() => setOpen(true)}
       onMouseLeave={() => setOpen(false)}
       onFocus={() => setOpen(true)}
@@ -20,10 +20,10 @@ export default function InfoKeyword({ color = "red", stat, detail, children }) {
           <motion.span
             className="keyword__card"
             role="status"
-            initial={{ opacity: 0, y: 8, scale: 0.96 }}
+            initial={{ opacity: 0, y: 6, scale: 0.98 }}
             animate={{ opacity: 1, y: 0, scale: 1 }}
-            exit={{ opacity: 0, y: 4, scale: 0.97 }}
-            transition={{ duration: 0.18, ease: "easeOut" }}
+            exit={{ opacity: 0, y: 3, scale: 0.99 }}
+            transition={{ duration: 0.16, ease: [0.16, 1, 0.3, 1] }}
           >
             <span className="keyword__stat">{stat}</span>
             <span className="keyword__detail">{detail}</span>
