@@ -8,7 +8,8 @@ The page is built around one idea: the thing you came for is a **pass**, so
 the pass is the hero object, the registration form and the payoff all at
 once. Everything is milled out of the same dark metal.
 
-**Live site:** _add your deployment link here_
+**Live site:** https://manshacodes.github.io/designverse-fest/
+**Source:** https://github.com/manshacodes/designverse-fest
 
 ## What's on the page
 
