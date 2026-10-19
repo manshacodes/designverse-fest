@@ -46,8 +46,8 @@ export default function ScheduleMap() {
   const [reached, setReached] = useState(0);
 
   const { scrollYProgress } = useScroll({
-    target: sectionRef,
-    offset: ["start end", "end start"],
+    target: mapRef,
+    offset: ["start start", "end end"],
   });
 
   useEffect(() => {

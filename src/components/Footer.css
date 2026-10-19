@@ -71,3 +71,26 @@
 }
 .footer__spark--a { top: 34%; right: 8%; }
 .footer__spark--b { top: 52%; left: 42%; }
+
+.footer__ext {
+  margin-left: 5px;
+  font-size: 0.85em;
+  opacity: 0.55;
+}
+
+.footer__link {
+  border: none;
+  background: none;
+  padding: 0;
+  text-align: left;
+  width: fit-content;
+  font-family: inherit;
+  font-size: 13.5px;
+  color: var(--silver);
+  border-bottom: 1px solid transparent;
+  transition: border-color 0.18s var(--ease-crisp);
+}
+
+.footer__link:hover {
+  border-bottom-color: var(--silver-faint);
+}

@@ -1,5 +1,24 @@
 import { Sparkle } from "./Deco";
+import { openPass } from "./Admission";
 import "./Footer.css";
+
+const NIRVANA = {
+  site: "https://nirvanaigdtuw.vercel.app/",
+  instagram: "https://www.instagram.com/designclubigdtuw/",
+  linkedin:
+    "https://www.linkedin.com/in/nirvana-design-club-of-igdtuw-6590203a8/",
+};
+
+function External({ href, children }) {
+  return (
+    <a href={href} target="_blank" rel="noopener noreferrer">
+      {children}
+      <span className="footer__ext" aria-hidden="true">
+        ↗
+      </span>
+    </a>
+  );
+}
 
 export default function Footer() {
   return (
@@ -14,20 +33,24 @@ export default function Footer() {
           </div>
 
           <div className="footer__col">
-            <span className="mono">Contact</span>
-            <a href="mailto:designverse@igdtuw.ac.in">designverse@igdtuw.ac.in</a>
-            <p>Design &amp; Innovation Society</p>
+            <span className="mono">Organised by</span>
+            <External href={NIRVANA.site}>Nirvana</External>
+            <p>Design Club of IGDTUW</p>
+            <a href="mailto:nirvana@igdtuw.ac.in">nirvana@igdtuw.ac.in</a>
           </div>
 
           <div className="footer__col">
             <span className="mono">Follow</span>
-            <a href="#top">Instagram</a>
-            <a href="#top">LinkedIn</a>
+            <External href={NIRVANA.instagram}>Instagram</External>
+            <External href={NIRVANA.linkedin}>LinkedIn</External>
           </div>
 
           <div className="footer__col">
             <span className="mono">Admission</span>
-            <a href="#register">Claim your pass</a>
+            <button type="button" className="footer__link" onClick={openPass}>
+              Claim your pass
+            </button>
+            <a href="#schedule">Full schedule</a>
             <p>Free · limited guest seats</p>
           </div>
         </div>
