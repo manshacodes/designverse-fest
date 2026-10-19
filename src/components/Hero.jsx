@@ -2,7 +2,8 @@ import { motion } from "framer-motion";
 import ScrambleText from "./ScrambleText";
 import InfoKeyword from "./InfoKeyword";
 import Annotation from "./Annotation";
-import MetalTicket from "./MetalTicket";
+import FlipTicket from "./FlipTicket";
+import { openPass } from "./Admission";
 import "./Hero.css";
 
 const rise = {
@@ -19,7 +20,7 @@ export default function Hero() {
           <span className="mono">14–15 MAR 2026 · 10:00–18:00 IST</span>
         </div>
 
-        <h1 className="hero__title chrome-text">
+        <h1 className="hero__title chrome-text" data-speed="0.92">
           <ScrambleText text="DESIGNVERSE" duration={1.1} />
         </h1>
 
@@ -68,9 +69,9 @@ export default function Hero() {
               {...rise}
               transition={{ duration: 0.5, ease: [0.16, 1, 0.3, 1], delay: 0.42 }}
             >
-              <a href="#register" className="btn btn--metal">
+              <button type="button" className="btn btn--metal" onClick={openPass}>
                 Claim your pass
-              </a>
+              </button>
               <a href="#schedule" className="btn btn--ghost">
                 See the schedule
               </a>
@@ -100,13 +101,10 @@ export default function Hero() {
             </motion.dl>
           </div>
 
-          <div className="hero__object">
-            <MetalTicket drop />
+          <div className="hero__object" data-speed="1.12">
+            <FlipTicket />
             <Annotation mark="sw" className="hero__note hero__note--pass" delay={1.2}>
-              milled, not printed
-            </Annotation>
-            <Annotation mark="up" className="hero__note hero__note--move" delay={1.5}>
-              move your cursor over it
+              click it to fill it in
             </Annotation>
           </div>
         </div>

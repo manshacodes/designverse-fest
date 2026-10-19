@@ -1,4 +1,5 @@
 import { useState } from "react";
+import { openPass } from "./Admission";
 import "./Nav.css";
 
 const LINKS = [
@@ -26,9 +27,9 @@ export default function Nav() {
           ))}
         </nav>
 
-        <a href="#register" className="nav__cta">
+        <button type="button" className="nav__cta" onClick={openPass}>
           Claim your pass
-        </a>
+        </button>
 
         <button
           type="button"
@@ -49,9 +50,16 @@ export default function Nav() {
             {l.label}
           </a>
         ))}
-        <a href="#register" className="nav__cta" onClick={() => setOpen(false)}>
+        <button
+          type="button"
+          className="nav__cta"
+          onClick={() => {
+            setOpen(false);
+            openPass();
+          }}
+        >
           Claim your pass
-        </a>
+        </button>
       </div>
     </header>
   );

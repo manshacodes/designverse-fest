@@ -1,8 +1,12 @@
 import { useEffect, useMemo, useRef, useState } from "react";
 import { animate, useInView, useMotionValue, useSpring } from "framer-motion";
+import gsap from "gsap";
+import { ScrollTrigger } from "gsap/ScrollTrigger";
 import { reelPose } from "../lib/reelPose";
 import Annotation from "./Annotation";
 import "./Highlights.css";
+
+gsap.registerPlugin(ScrollTrigger);
 
 const ACTIVITIES = [
   { label: "UI/UX Workshop", note: "Figma systems · 2 hrs" },
@@ -32,6 +36,7 @@ export default function Highlights() {
   const [width, setWidth] = useState(900);
   const dragging = useRef(false);
   const lastX = useRef(0);
+  const scrollAngle = useRef(0);
 
   const reduceMotion = useMemo(
     () =>
@@ -85,8 +90,8 @@ export default function Highlights() {
     const tick = () => {
       if (!dragging.current && !reduceMotion && expansion.get() > 0.98) {
         angleTarget.current += 0.085;
-        angleSpring.set(angleTarget.current);
       }
+      angleSpring.set(angleTarget.current + scrollAngle.current);
 
       const angleOffset = angleSpring.get();
       const f = formation.get();
@@ -117,6 +122,25 @@ export default function Highlights() {
     raf = requestAnimationFrame(tick);
     return () => cancelAnimationFrame(raf);
   }, [formation, expansion, angleSpring, radiusRange, reduceMotion]);
+
+  // scroll scrubs the ring round, the way the GSAP scroll demos scrub a timeline
+  useEffect(() => {
+    if (reduceMotion) return undefined;
+    const el = stageRef.current;
+    if (!el) return undefined;
+
+    const st = ScrollTrigger.create({
+      trigger: el,
+      start: "top bottom",
+      end: "bottom top",
+      scrub: true,
+      onUpdate: (self) => {
+        scrollAngle.current = (self.progress - 0.5) * 190;
+      },
+    });
+
+    return () => st.kill();
+  }, [reduceMotion]);
 
   const onPointerDown = (e) => {
     dragging.current = true;
