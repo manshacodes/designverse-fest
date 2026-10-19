@@ -124,9 +124,22 @@ export default function FlipTicket() {
     <div className={`ticket-stage ${settled ? "is-flat" : ""}`} ref={stageRef}>
       <motion.div
         className="ticket-drop"
-        initial={{ x: 210, y: -330, rotate: 15, opacity: 0 }}
-        animate={{ x: 0, y: 0, rotate: flipped ? 0 : -2.5, opacity: 1 }}
-        transition={{ duration: 1, ease: [0.16, 1, 0.3, 1], delay: 0.25 }}
+        // kept short enough to stay inside the hero's clip, so the fall is
+        // actually visible rather than happening off-frame
+        initial={{ x: 64, y: -150, rotate: 12, scale: 0.94, opacity: 0 }}
+        animate={{
+          x: 0,
+          y: 0,
+          rotate: flipped ? 0 : -2.5,
+          scale: 1,
+          opacity: 1,
+        }}
+        transition={{
+          duration: 1.15,
+          ease: [0.22, 1.04, 0.36, 1],
+          delay: 0.45,
+          opacity: { duration: 0.35, delay: 0.45 },
+        }}
       >
         <motion.div
           className={`ticket ${flipped ? "is-flipped" : ""} ${
