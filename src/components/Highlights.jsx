@@ -155,12 +155,71 @@ export default function Highlights() {
     return () => st.kill();
   }, [reduceMotion]);
 
+  // Touch needs its own path. Pointer events get cancelled the moment the
+  // browser decides the gesture is a scroll, so horizontal swipes never
+  // reached the ring on a phone.
+  useEffect(() => {
+    const el = stageRef.current;
+    if (!el) return undefined;
+
+    let startX = 0;
+    let startY = 0;
+    let lastTouchX = 0;
+    let axis = null;
+
+    const onStart = (e) => {
+      const t = e.touches[0];
+      startX = t.clientX;
+      startY = t.clientY;
+      lastTouchX = t.clientX;
+      axis = null;
+    };
+
+    const onMove = (e) => {
+      const t = e.touches[0];
+      if (!t) return;
+      if (axis === null) {
+        const dx = Math.abs(t.clientX - startX);
+        const dy = Math.abs(t.clientY - startY);
+        if (dx > 6 || dy > 6) axis = dx > dy ? "x" : "y";
+      }
+      if (axis === "x") {
+        e.preventDefault();
+        dragging.current = true;
+        angleTarget.current += (t.clientX - lastTouchX) * 0.42;
+        lastTouchX = t.clientX;
+      }
+    };
+
+    const onEnd = () => {
+      dragging.current = false;
+      axis = null;
+    };
+
+    el.addEventListener("touchstart", onStart, { passive: true });
+    el.addEventListener("touchmove", onMove, { passive: false });
+    el.addEventListener("touchend", onEnd);
+    el.addEventListener("touchcancel", onEnd);
+    return () => {
+      el.removeEventListener("touchstart", onStart);
+      el.removeEventListener("touchmove", onMove);
+      el.removeEventListener("touchend", onEnd);
+      el.removeEventListener("touchcancel", onEnd);
+    };
+  }, []);
+
+  const step = (dir) => {
+    angleTarget.current += dir * (360 / TOTAL);
+  };
+
   const onPointerDown = (e) => {
+    if (e.pointerType === "touch") return;
     dragging.current = true;
     lastX.current = e.clientX;
     e.currentTarget.setPointerCapture(e.pointerId);
   };
   const onPointerMove = (e) => {
+    if (e.pointerType === "touch") return;
     if (!dragging.current) return;
     const dx = e.clientX - lastX.current;
     lastX.current = e.clientX;
@@ -268,6 +327,26 @@ export default function Highlights() {
               </a>
             ))}
           </div>
+        </div>
+
+        <div className="reel-controls">
+          <button
+            type="button"
+            className="reel-btn"
+            onClick={() => step(-1)}
+            aria-label="Previous session"
+          >
+            ←
+          </button>
+          <span className="mono reel-controls__hint">Swipe or tap</span>
+          <button
+            type="button"
+            className="reel-btn"
+            onClick={() => step(1)}
+            aria-label="Next session"
+          >
+            →
+          </button>
         </div>
 
         <Annotation mark="up" className="highlights__note" delay={0.3}>
