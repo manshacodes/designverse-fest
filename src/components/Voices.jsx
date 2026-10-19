@@ -1,6 +1,6 @@
 import { useRef } from "react";
-import { motion, useScroll, useTransform } from "framer-motion";
-import { Sparkle } from "./Deco";
+import { motion, useScroll, useSpring, useTransform } from "framer-motion";
+import { Sparkle, Rivets, DimLine } from "./Deco";
 import "./Voices.css";
 
 const VOICES = [
@@ -79,6 +79,14 @@ export default function Voices() {
     offset: ["start start", "end end"],
   });
 
+  // a spring on the raw scroll makes the cards fall with weight rather than
+  // snapping frame to frame
+  const progress = useSpring(scrollYProgress, {
+    stiffness: 120,
+    damping: 30,
+    mass: 0.45,
+  });
+
   return (
     <section className="voices" id="voices" ref={ref}>
       <div className="voices__sticky">
@@ -104,13 +112,14 @@ export default function Voices() {
             <Sparkle size={15} className="sparkle--pulse voices__spark voices__spark--b" />
 
             <div className="voices__deck">
+              <Rivets inset={11} />
               {VOICES.map((voice, i) => (
                 <VoiceCard
                   key={voice.name}
                   voice={voice}
                   index={i}
                   total={VOICES.length}
-                  progress={scrollYProgress}
+                  progress={progress}
                 />
               ))}
             </div>

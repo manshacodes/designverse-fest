@@ -260,3 +260,5 @@
   line-height: 1.65;
   color: var(--silver-dim);
 }
+
+.seats { position: relative; }

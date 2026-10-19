@@ -1,7 +1,7 @@
 import { useEffect, useRef, useState } from "react";
 import { AnimatePresence, motion, useInView } from "framer-motion";
 import Annotation from "./Annotation";
-import { Sparkle } from "./Deco";
+import { Sparkle, Rivets } from "./Deco";
 import "./Admission.css";
 
 const DOORS = new Date("2027-03-13T10:00:00+05:30");
@@ -99,6 +99,7 @@ export default function Admission() {
 
         {/* seats remaining */}
         <div className="seats" ref={barRef}>
+          <Rivets inset={-4} />
           <div className="seats__row">
             <span className="mono">Seats claimed</span>
             <span className="mono seats__count">

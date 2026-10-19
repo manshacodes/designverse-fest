@@ -83,3 +83,54 @@ export function Ruler({ ticks = 48, className = "" }) {
     </span>
   );
 }
+
+/** A domed rivet, like the ones holding a metal panel down. */
+export function Rivet({ size = 9, className = "", style }) {
+  return (
+    <span
+      className={`rivet ${className}`}
+      style={{ width: size, height: size, ...style }}
+      aria-hidden="true"
+    />
+  );
+}
+
+/** Four rivets, one per corner of whatever box this sits in. */
+export function Rivets({ inset = 14 }) {
+  return (
+    <span className="rivets" style={{ "--rivet-inset": `${inset}px` }} aria-hidden="true">
+      <Rivet className="rivets__r rivets__r--tl" />
+      <Rivet className="rivets__r rivets__r--tr" />
+      <Rivet className="rivets__r rivets__r--bl" />
+      <Rivet className="rivets__r rivets__r--br" />
+    </span>
+  );
+}
+
+/** Ticket barcode — irregular bar widths so it doesn't read as a pattern. */
+export function Barcode({ bars = 46, className = "" }) {
+  const widths = Array.from({ length: bars }, (_, i) => {
+    const n = Math.sin(i * 12.9898) * 43758.5453;
+    return 1 + Math.floor(Math.abs(n - Math.floor(n)) * 3);
+  });
+  return (
+    <span className={`barcode ${className}`} aria-hidden="true">
+      {widths.map((w, i) => (
+        <i key={i} style={{ width: w }} />
+      ))}
+    </span>
+  );
+}
+
+/** An engineering dimension line: |←—— label ——→| */
+export function DimLine({ label, className = "" }) {
+  return (
+    <span className={`dim ${className}`} aria-hidden="true">
+      <i className="dim__cap" />
+      <i className="dim__rule" />
+      <span className="dim__label">{label}</span>
+      <i className="dim__rule" />
+      <i className="dim__cap" />
+    </span>
+  );
+}

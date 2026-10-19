@@ -187,3 +187,5 @@
   .voices__spark--a { top: 2%; right: 6%; left: auto; }
   .voices__spark--b { display: none; }
 }
+
+.voices__deck .rivets { z-index: 20; }

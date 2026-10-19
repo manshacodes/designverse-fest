@@ -94,3 +94,16 @@
 .footer__link:hover {
   border-bottom-color: var(--silver-faint);
 }
+
+.footer__strip {
+  display: flex;
+  align-items: center;
+  gap: clamp(18px, 4vw, 48px);
+  margin-top: clamp(26px, 4vw, 44px);
+  opacity: 0.8;
+}
+
+.footer__dim {
+  flex: 1;
+  min-width: 120px;
+}

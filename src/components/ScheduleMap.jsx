@@ -7,7 +7,7 @@ import {
   useMotionValueEvent,
 } from "framer-motion";
 import Annotation from "./Annotation";
-import { Sparkle } from "./Deco";
+import { Sparkle, Rivets, DimLine } from "./Deco";
 import "./ScheduleMap.css";
 
 const STOPS = [
@@ -147,6 +147,8 @@ export default function ScheduleMap() {
         </div>
 
         <div className={`map ${narrow ? "is-narrow" : ""}`} ref={mapRef}>
+          <span className="blueprint" aria-hidden="true" />
+          <Rivets inset={6} />
           <svg
             className="map__svg"
             viewBox="0 0 100 100"

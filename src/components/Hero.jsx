@@ -4,7 +4,7 @@ import InfoKeyword from "./InfoKeyword";
 import Annotation from "./Annotation";
 import FlipTicket from "./FlipTicket";
 import { openPass } from "./Admission";
-import { Sparkle, Ruler, RegMark } from "./Deco";
+import { Sparkle, Ruler, RegMark, DimLine, Rivets } from "./Deco";
 import "./Hero.css";
 
 const rise = {
@@ -103,6 +103,8 @@ export default function Hero() {
                 <dd>First</dd>
               </div>
             </motion.dl>
+
+            <DimLine label="13 — 14 March 2027" className="hero__dim" />
           </div>
 
           <Sparkle size={34} className="sparkle--pulse hero__spark hero__spark--a" />

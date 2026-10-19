@@ -1,4 +1,4 @@
-import { Sparkle } from "./Deco";
+import { Sparkle, Barcode, DimLine } from "./Deco";
 import { openPass } from "./Admission";
 import "./Footer.css";
 
@@ -61,6 +61,11 @@ export default function Footer() {
         <p className="footer__wordmark chrome-text" aria-hidden="true">
           DESIGNVERSE
         </p>
+
+        <div className="footer__strip">
+          <Barcode bars={52} />
+          <DimLine label="Ed. 01 · two days" className="footer__dim" />
+        </div>
 
         <div className="footer__base">
           <span className="mono">© 2027 — Edition 01</span>
