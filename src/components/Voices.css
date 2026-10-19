@@ -14,6 +14,7 @@
 }
 
 .voices__inner {
+  position: relative;
   display: grid;
   grid-template-columns: 1fr 1fr;
   gap: clamp(32px, 5vw, 76px);
@@ -173,4 +174,16 @@
     transform: none !important;
     opacity: 1 !important;
   }
+}
+
+.voices__spark {
+  position: absolute;
+  z-index: 5;
+}
+.voices__spark--a { top: 8%; left: 44%; }
+.voices__spark--b { bottom: 14%; left: 36%; }
+
+@media (max-width: 900px) {
+  .voices__spark--a { top: 2%; right: 6%; left: auto; }
+  .voices__spark--b { display: none; }
 }

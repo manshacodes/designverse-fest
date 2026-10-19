@@ -1,4 +1,5 @@
 .admission {
+  position: relative;
   padding-block: clamp(56px, 9vw, 112px);
   border-top: 1px solid var(--hairline);
 }
@@ -93,3 +94,10 @@
     margin-bottom: 0;
   }
 }
+
+.adm__spark {
+  position: absolute;
+  z-index: 5;
+}
+.adm__spark--a { top: 9%; right: 5%; }
+.adm__spark--b { bottom: 18%; right: 22%; }

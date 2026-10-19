@@ -1,3 +1,4 @@
+import { Sparkle } from "./Deco";
 import "./Footer.css";
 
 export default function Footer() {
@@ -30,6 +31,9 @@ export default function Footer() {
             <p>Free · limited guest seats</p>
           </div>
         </div>
+
+        <Sparkle size={21} className="sparkle--spin footer__spark footer__spark--a" />
+        <Sparkle size={13} className="sparkle--pulse footer__spark footer__spark--b" />
 
         <p className="footer__wordmark chrome-text" aria-hidden="true">
           DESIGNVERSE

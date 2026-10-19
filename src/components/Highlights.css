@@ -159,3 +159,16 @@
     perspective: 320px;
   }
 }
+
+/* drifting chrome sparkles around the ring */
+.hl__spark {
+  position: absolute;
+  z-index: 5;
+}
+.hl__spark--a { top: 6%; left: 7%; }
+.hl__spark--b { top: 22%; right: 11%; }
+.hl__spark--c { bottom: 14%; right: 6%; }
+
+@media (max-width: 560px) {
+  .hl__spark--b { right: 5%; }
+}

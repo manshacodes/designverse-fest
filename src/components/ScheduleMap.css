@@ -255,3 +255,13 @@
     align-items: start;
   }
 }
+
+.map__spark {
+  position: absolute;
+  z-index: 5;
+}
+.map__spark--a { top: 12%; right: 6%; }
+.map__spark--b { top: 46%; left: 5%; }
+.map__spark--c { bottom: 9%; right: 13%; }
+
+.map.is-narrow .map__spark--b { left: auto; right: 7%; }

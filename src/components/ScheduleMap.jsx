@@ -1,6 +1,7 @@
 import { useEffect, useMemo, useRef, useState } from "react";
 import { motion, useScroll, useMotionValue, useMotionValueEvent } from "framer-motion";
 import Annotation from "./Annotation";
+import { Sparkle } from "./Deco";
 import "./ScheduleMap.css";
 
 const STOPS = [
@@ -170,6 +171,10 @@ export default function ScheduleMap() {
               </li>
             ))}
           </ol>
+
+          <Sparkle size={26} className="sparkle--pulse map__spark map__spark--a" />
+          <Sparkle size={15} className="sparkle--spin map__spark map__spark--b" />
+          <Sparkle size={20} className="sparkle--pulse map__spark map__spark--c" />
 
           <Annotation mark="se" className="map__note" delay={0.2}>
             the sprint runs overnight

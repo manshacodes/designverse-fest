@@ -1,5 +1,6 @@
 import { useRef } from "react";
 import { motion, useScroll, useTransform } from "framer-motion";
+import { Sparkle } from "./Deco";
 import "./Voices.css";
 
 const VOICES = [
@@ -98,6 +99,9 @@ export default function Voices() {
                 scrolling to flip through.
               </p>
             </div>
+
+            <Sparkle size={24} className="sparkle--spin voices__spark voices__spark--a" />
+            <Sparkle size={15} className="sparkle--pulse voices__spark voices__spark--b" />
 
             <div className="voices__deck">
               {VOICES.map((voice, i) => (

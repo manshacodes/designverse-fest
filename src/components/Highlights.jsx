@@ -4,6 +4,7 @@ import gsap from "gsap";
 import { ScrollTrigger } from "gsap/ScrollTrigger";
 import { reelPose } from "../lib/reelPose";
 import Annotation from "./Annotation";
+import { Sparkle } from "./Deco";
 import "./Highlights.css";
 
 gsap.registerPlugin(ScrollTrigger);
@@ -175,6 +176,9 @@ export default function Highlights() {
       </div>
 
       <div className="highlights__stage-wrap">
+        <Sparkle size={30} className="sparkle--pulse hl__spark hl__spark--a" />
+        <Sparkle size={16} className="sparkle--spin hl__spark hl__spark--b" />
+        <Sparkle size={22} className="sparkle--pulse hl__spark hl__spark--c" />
         <div
           className="reel-stage"
           ref={stageRef}

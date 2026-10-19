@@ -1,5 +1,6 @@
 import { motion } from "framer-motion";
 import Annotation from "./Annotation";
+import { Sparkle } from "./Deco";
 import "./Admission.css";
 
 const TERMS = [
@@ -51,6 +52,9 @@ export default function Admission() {
             </motion.div>
           ))}
         </dl>
+
+        <Sparkle size={28} className="sparkle--pulse adm__spark adm__spark--a" />
+        <Sparkle size={17} className="sparkle--spin adm__spark adm__spark--b" />
 
         <div className="admission__cta">
           <button type="button" className="btn btn--metal" onClick={openPass}>
