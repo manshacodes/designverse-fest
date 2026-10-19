@@ -217,3 +217,45 @@
 @media (max-width: 560px) {
   .hl__spark--b { right: 5%; }
 }
+
+
+/* oversized ghost of the glyph, so each plate has a graphic of its own */
+.reel-card__watermark {
+  position: absolute;
+  right: -22%;
+  bottom: -14%;
+  width: 86%;
+  height: auto;
+  opacity: 0.12;
+  pointer-events: none;
+  z-index: 1;
+}
+
+/* day tab in the top-right corner of the plate */
+.reel-card__day {
+  position: absolute;
+  top: 0;
+  right: 0;
+  z-index: 2;
+  padding: 5px 10px 6px;
+  border-bottom-left-radius: 3px;
+  font-family: var(--font-mono);
+  font-size: 9px;
+  font-weight: 600;
+  letter-spacing: 0.18em;
+  text-transform: uppercase;
+  background: color-mix(in srgb, currentColor 14%, transparent);
+  color: inherit;
+}
+
+/* corner ticks, borrowed from the crop marks elsewhere on the page */
+.reel-card__body::before {
+  content: "";
+  position: absolute;
+  left: -4px;
+  top: -9px;
+  width: 11px;
+  height: 1px;
+  background: currentColor;
+  opacity: 0.4;
+}

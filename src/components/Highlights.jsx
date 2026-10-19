@@ -210,6 +210,23 @@ export default function Highlights() {
                 }}
                 style={{ width: cardSize.width, height: cardSize.height }}
               >
+                <svg
+                  className="reel-card__watermark"
+                  viewBox="0 0 24 24"
+                  fill="none"
+                  aria-hidden="true"
+                >
+                  <path
+                    d={GLYPHS[activity.glyph]}
+                    stroke="currentColor"
+                    strokeWidth="0.7"
+                    strokeLinecap="round"
+                    strokeLinejoin="round"
+                  />
+                </svg>
+
+                <span className="reel-card__day">{activity.day}</span>
+
                 <span className="reel-card__top">
                   <span className="reel-card__index">
                     {String(i + 1).padStart(2, "0")}

@@ -1,5 +1,11 @@
 import { useEffect, useMemo, useRef, useState } from "react";
-import { motion, useScroll, useMotionValue, useMotionValueEvent } from "framer-motion";
+import {
+  motion,
+  useScroll,
+  useSpring,
+  useMotionValue,
+  useMotionValueEvent,
+} from "framer-motion";
 import Annotation from "./Annotation";
 import { Sparkle } from "./Deco";
 import "./ScheduleMap.css";
@@ -42,12 +48,22 @@ export default function ScheduleMap() {
   const pathRef = useRef(null);
 
   const [narrow, setNarrow] = useState(false);
-  const [marker, setMarker] = useState({ x: 50, y: 0 });
   const [reached, setReached] = useState(0);
+  const markerRef = useRef(null);
 
   const { scrollYProgress } = useScroll({
     target: mapRef,
-    offset: ["start start", "end end"],
+    // begins while the map is still arriving, so the marker is already
+    // travelling by the time the first stops are on screen
+    offset: ["start center", "end end"],
+  });
+
+  // a spring on the raw progress is what makes the bearing glide instead of
+  // snapping frame to frame with the scroll
+  const progress = useSpring(scrollYProgress, {
+    stiffness: 130,
+    damping: 28,
+    mass: 0.35,
   });
 
   useEffect(() => {
@@ -84,17 +100,22 @@ export default function ScheduleMap() {
     if (!path) return;
     const len = path.getTotalLength();
     setPathLen(len);
-    dashOffset.set(len * (1 - scrollYProgress.get()));
-  }, [d, dashOffset, scrollYProgress]);
+    dashOffset.set(len * (1 - progress.get()));
+  }, [d, dashOffset, progress]);
 
-  useMotionValueEvent(scrollYProgress, "change", (p) => {
+  // written straight to the DOM — re-rendering React on every scroll frame is
+  // what made this stutter
+  useMotionValueEvent(progress, "change", (p) => {
     const path = pathRef.current;
     if (!path) return;
     const clamped = Math.max(0, Math.min(1, p));
     const len = path.getTotalLength();
     dashOffset.set(len * (1 - clamped));
     const pt = path.getPointAtLength(clamped * len);
-    setMarker({ x: pt.x, y: pt.y });
+    if (markerRef.current) {
+      markerRef.current.style.left = `${pt.x}%`;
+      markerRef.current.style.top = `${pt.y}%`;
+    }
     setReached(points.filter((stop) => stop.y <= pt.y + 1.2).length);
   });
 
@@ -149,7 +170,8 @@ export default function ScheduleMap() {
 
           <span
             className="map__marker"
-            style={{ left: `${marker.x}%`, top: `${marker.y}%` }}
+            ref={markerRef}
+            style={{ left: "50%", top: "0%" }}
             aria-hidden="true"
           />
 
