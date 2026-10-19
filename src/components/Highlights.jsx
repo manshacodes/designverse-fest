@@ -9,15 +9,27 @@ import "./Highlights.css";
 
 gsap.registerPlugin(ScrollTrigger);
 
+// simple stroke glyphs, one per block, drawn in the same silver as the type
+const GLYPHS = {
+  artboard: "M3 7h18M3 17h18M7 3v18M17 3v18",
+  mark: "M12 3v18M3 12h18M5.6 5.6l12.8 12.8M18.4 5.6L5.6 18.4",
+  bezier: "M3 18c6 0 12-12 18-12M3 18h3M18 6h3M4.5 16.5v3M19.5 4.5v3",
+  stopwatch: "M12 21a8 8 0 100-16 8 8 0 000 16zM12 9v4l2.5 2.5M9 2h6",
+  sheets: "M7 4h10v16H7zM4 7v13h10",
+  mic: "M12 15a3 3 0 003-3V6a3 3 0 00-6 0v6a3 3 0 003 3zM6 11a6 6 0 0012 0M12 18v3",
+  door: "M4 21V5l10-2v20M4 21h16M14 21V8h6v13M10 12h.8",
+  trophy: "M7 4h10v5a5 5 0 01-10 0V4zM5 5h2M17 5h2M12 14v4M9 21h6",
+};
+
 const ACTIVITIES = [
-  { label: "UI/UX Workshop", note: "Figma systems · 2 hrs" },
-  { label: "Branding Bootcamp", note: "Identity design · 2 hrs" },
-  { label: "Motion & Illustration", note: "After Effects basics" },
-  { label: "Live Build Sprint", note: "24 hrs · teams of 4" },
-  { label: "Portfolio Reviews", note: "1:1 with mentors" },
-  { label: "Design Talks", note: "8 speakers · main hall" },
-  { label: "Studio Tours", note: "Partner studios, Delhi" },
-  { label: "Closing Showcase", note: "Judged · Sunday 17:00" },
+  { label: "UI/UX Workshop", note: "Design systems in Figma", day: "Sat", time: "10:30", len: "2 hrs", cap: "60 seats", glyph: "artboard" },
+  { label: "Design Talks", note: "Founders and studio leads", day: "Sat", time: "13:30", len: "90 min", cap: "Open", glyph: "mic" },
+  { label: "Branding Bootcamp", note: "Brief to finished mark", day: "Sat", time: "15:00", len: "2 hrs", cap: "60 seats", glyph: "mark" },
+  { label: "Motion & Illustration", note: "After Effects fundamentals", day: "Sat", time: "15:00", len: "2 hrs", cap: "40 seats", glyph: "bezier" },
+  { label: "Live Build Sprint", note: "Team up, ship by Sunday", day: "Sat", time: "17:00", len: "24 hrs", cap: "25 teams", glyph: "stopwatch" },
+  { label: "Studio Tours", note: "Partner studios across Delhi", day: "Sun", time: "10:00", len: "3 hrs", cap: "30 seats", glyph: "door" },
+  { label: "Portfolio Reviews", note: "1:1 with working designers", day: "Sun", time: "11:30", len: "15 min", cap: "80 slots", glyph: "sheets" },
+  { label: "Closing Showcase", note: "Judged, open to everyone", day: "Sun", time: "17:00", len: "60 min", cap: "Open", glyph: "trophy" },
 ];
 
 const TOTAL = ACTIVITIES.length;
@@ -198,12 +210,43 @@ export default function Highlights() {
                 }}
                 style={{ width: cardSize.width, height: cardSize.height }}
               >
-                <span className="reel-card__index">
-                  {String(i + 1).padStart(2, "0")}
+                <span className="reel-card__top">
+                  <span className="reel-card__index">
+                    {String(i + 1).padStart(2, "0")}
+                  </span>
+                  <svg
+                    className="reel-card__glyph"
+                    viewBox="0 0 24 24"
+                    fill="none"
+                    aria-hidden="true"
+                  >
+                    <path
+                      d={GLYPHS[activity.glyph]}
+                      stroke="currentColor"
+                      strokeWidth="1.2"
+                      strokeLinecap="round"
+                      strokeLinejoin="round"
+                    />
+                  </svg>
                 </span>
+
                 <span className="reel-card__body">
                   <span className="reel-card__label">{activity.label}</span>
                   <span className="reel-card__note">{activity.note}</span>
+                  <span className="reel-card__meta">
+                    <span>
+                      <em>When</em>
+                      {activity.day} {activity.time}
+                    </span>
+                    <span>
+                      <em>Runs</em>
+                      {activity.len}
+                    </span>
+                    <span>
+                      <em>Space</em>
+                      {activity.cap}
+                    </span>
+                  </span>
                 </span>
               </a>
             ))}
