@@ -10,7 +10,7 @@ function makeCode() {
   for (let i = 0; i < 5; i += 1) {
     code += chars[Math.floor(Math.random() * chars.length)];
   }
-  return `DV26-${code}`;
+  return `DV27-${code}`;
 }
 
 export default function FlipTicket() {
@@ -157,7 +157,7 @@ export default function FlipTicket() {
               <span className="ticket__name">DESIGNVERSE</span>
               <div className="ticket__meta">
                 <span className="ticket__cell">
-                  <em>Dates</em>14–15 MAR 2026
+                  <em>Dates</em>13–14 MAR 2027
                 </span>
                 <span className="ticket__cell">
                   <em>Doors</em>10:00 IST
@@ -171,7 +171,7 @@ export default function FlipTicket() {
             <div className="ticket__perf" aria-hidden="true" />
 
             <div className="ticket__stub">
-              <span className="ticket__stub-code">DV—26—0001</span>
+              <span className="ticket__stub-code">DV—27—0001</span>
               <span className="ticket__stub-ed">ED. 01</span>
             </div>
 

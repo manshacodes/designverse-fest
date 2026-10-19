@@ -2,7 +2,7 @@
 
 # DESIGNVERSE
 
-**A student design & innovation fest — IGDTUW, 14–15 March 2026**
+**A student design & innovation fest — IGDTUW, 13–14 March 2027**
 
 Built for Nirvana, the Design Club of IGDTUW
 

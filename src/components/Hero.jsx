@@ -21,7 +21,7 @@ export default function Hero() {
             <RegMark size={13} /> ED. 01 — IGDTUW, DELHI
           </span>
           <Ruler ticks={34} className="hero__rule" />
-          <span className="mono">14–15 MAR 2026 · 10:00–18:00 IST</span>
+          <span className="mono">13–14 MAR 2027 · 10:00–18:00 IST</span>
         </div>
 
         <h1 className="hero__title chrome-text" data-speed="0.92">

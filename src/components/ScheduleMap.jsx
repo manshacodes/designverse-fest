@@ -136,10 +136,10 @@ export default function ScheduleMap() {
 
         <div className="schedule-map__legend">
           <span className="mono">
-            <i className="dot dot--sat" /> Sat 14 Mar
+            <i className="dot dot--sat" /> Sat 13 Mar
           </span>
           <span className="mono">
-            <i className="dot dot--sun" /> Sun 15 Mar
+            <i className="dot dot--sun" /> Sun 14 Mar
           </span>
           <span className="mono schedule-map__progress">
             {String(Math.min(reached, STOPS.length)).padStart(2, "0")} / {STOPS.length} stops
