@@ -63,6 +63,7 @@ export default function Footer() {
         </p>
 
         <div className="footer__strip">
+          <span className="mono footer__strip-label">DV—27—0001</span>
           <Barcode bars={52} />
           <DimLine label="Ed. 01 · two days" className="footer__dim" />
         </div>

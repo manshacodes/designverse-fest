@@ -85,7 +85,7 @@ export function Ruler({ ticks = 48, className = "" }) {
 }
 
 /** A domed rivet, like the ones holding a metal panel down. */
-export function Rivet({ size = 9, className = "", style }) {
+export function Rivet({ size = 12, className = "", style }) {
   return (
     <span
       className={`rivet ${className}`}

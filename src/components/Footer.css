@@ -107,3 +107,8 @@
   flex: 1;
   min-width: 120px;
 }
+
+.footer__strip-label {
+  color: var(--silver);
+  white-space: nowrap;
+}
