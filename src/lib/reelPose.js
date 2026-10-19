@@ -32,16 +32,21 @@ export function reelPose({
   const t = clamp((formation - order * (1 - DEAL)) / DEAL, 0, 1);
   const dealt = easeOutCubic(t);
 
-  // Undealt cards sit stacked at the front and swing out to restAngle.
-  const angle = restAngle * dealt;
+  // 180deg is the near point of the ring, dead centre and facing the camera.
+  // Undealt cards sit stacked there and swing out to their resting angle.
+  const angle = 180 + (restAngle - 180) * dealt;
 
   const radius = lerp(radiusRange[0], radiusRange[1], expansion);
   const rad = (angle * Math.PI) / 180;
   const x = Math.sin(rad) * radius;
-  const z = -Math.cos(rad) * radius;
+  // Pull the ring back so its nearest point sits on the screen plane. With a
+  // short perspective anything in front of it blows up to infinity.
+  const z = -Math.cos(rad) * radius - radius;
   const scale = lerp(scaleRange[0], scaleRange[1], expansion) * lerp(0.82, 1, dealt);
   const opacity = dealt;
-  const rotateY = -angle;
+  // face outward from the ring centre, so the near card looks straight at you
+  // and the far arc turns its back (hidden by backface-visibility)
+  const rotateY = 180 - angle;
 
   return { x, z, rotateY, scale, opacity };
 }

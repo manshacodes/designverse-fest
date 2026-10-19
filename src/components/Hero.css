@@ -1,6 +1,7 @@
 .hero {
-  padding-top: clamp(26px, 4vw, 48px);
-  padding-bottom: clamp(48px, 8vw, 96px);
+  padding-top: clamp(22px, 3.4vw, 42px);
+  padding-bottom: clamp(52px, 8vw, 104px);
+  overflow: clip;
 }
 
 .hero__slug {
@@ -8,16 +9,16 @@
   justify-content: space-between;
   gap: 16px;
   flex-wrap: wrap;
-  padding-bottom: 14px;
+  padding-bottom: 13px;
   border-bottom: 1px solid var(--hairline);
 }
 
 .hero__title {
-  font-size: clamp(34px, 10.8vw, 156px);
-  line-height: 0.84;
-  letter-spacing: -0.042em;
-  font-weight: 600;
-  margin: clamp(30px, 5vw, 60px) 0 0;
+  font-family: var(--font-display);
+  font-size: clamp(46px, 14.6vw, 206px);
+  line-height: 0.82;
+  letter-spacing: 0.006em;
+  margin: clamp(26px, 4.4vw, 52px) 0 0;
   white-space: nowrap;
   max-width: 100%;
 }
@@ -25,16 +26,17 @@
 .hero__grid {
   display: grid;
   grid-template-columns: 1fr 1fr;
-  gap: clamp(32px, 5vw, 72px);
-  align-items: center;
-  padding-top: clamp(28px, 4vw, 52px);
+  gap: clamp(32px, 5vw, 76px);
+  align-items: start;
+  padding-top: clamp(28px, 4vw, 54px);
 }
 
 .hero__line {
-  margin-top: 0;
-  font-size: clamp(14px, 1.5vw, 17px);
+  font-family: var(--font-display);
+  font-size: clamp(19px, 2.6vw, 32px);
+  line-height: 1.06;
+  letter-spacing: 0.012em;
   text-transform: uppercase;
-  letter-spacing: 0.02em;
   color: var(--silver);
 }
 
@@ -42,7 +44,7 @@
   margin-top: 18px;
   max-width: 50ch;
   font-size: clamp(14px, 1.4vw, 15.5px);
-  line-height: 1.7;
+  line-height: 1.72;
   color: var(--silver-dim);
 }
 
@@ -53,18 +55,17 @@
   margin-top: 28px;
 }
 
-/* buttons: full pills, straight from moto-card */
 .btn {
   display: inline-flex;
   align-items: center;
   justify-content: center;
-  height: 44px;
-  padding: 0 22px;
+  height: 46px;
+  padding: 0 24px;
   border-radius: 999px;
   text-decoration: none;
+  font-family: var(--font-sans);
   font-size: 14.5px;
-  font-weight: 500;
-  letter-spacing: -0.005em;
+  font-variation-settings: "wght" 600;
   border: 1px solid transparent;
   transition:
     transform 0.2s var(--ease-crisp),
@@ -96,8 +97,35 @@
   background: rgba(255, 255, 255, 0.03);
 }
 
+/* four facts, set as a spec table rather than cards */
+.hero__facts {
+  display: grid;
+  grid-template-columns: repeat(4, minmax(0, 1fr));
+  gap: 14px;
+  margin: clamp(30px, 4vw, 44px) 0 0;
+  padding-top: 18px;
+  border-top: 1px solid var(--hairline);
+}
+
+.hero__facts div {
+  display: flex;
+  flex-direction: column;
+  gap: 6px;
+  min-width: 0;
+}
+
+.hero__facts dd {
+  margin: 0;
+  font-family: var(--font-display);
+  font-size: clamp(17px, 2.1vw, 24px);
+  letter-spacing: 0.012em;
+  text-transform: uppercase;
+  color: var(--silver);
+}
+
 .hero__object {
   position: relative;
+  padding-top: clamp(4px, 1.4vw, 18px);
 }
 
 .hero__note {
@@ -106,45 +134,46 @@
 }
 
 .hero__note--pass {
-  top: -56px;
-  right: -2%;
+  top: -46px;
+  right: 1%;
 }
 
 .hero__note--move {
-  left: 8%;
-  bottom: -76px;
+  left: 10%;
+  bottom: -74px;
 }
 
 @media (max-width: 940px) {
   .hero__grid {
     grid-template-columns: 1fr;
-    gap: 56px;
+    gap: 60px;
   }
 
   .hero__object {
     order: -1;
-  }
-
-  .hero__note--pass {
-    top: -10px;
-    right: 4%;
+    padding-bottom: 46px;
   }
 
   .hero__note--move {
-    bottom: -30px;
-    left: 4%;
+    bottom: -70px;
   }
 }
 
+/* stacked layout puts the ticket under the wordmark, so the note moves below it */
 @media (max-width: 620px) {
   .hero__note--pass {
-    top: -44px;
-    right: 0;
+    top: auto;
+    bottom: -40px;
+    right: 2%;
     font-size: 16px;
+  }
+
+  .hero__facts {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+    gap: 18px 14px;
   }
 }
 
-/* no cursor to move on touch devices */
 @media (max-width: 520px) {
   .hero__note--move {
     display: none;

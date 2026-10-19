@@ -38,11 +38,11 @@
 /* oversized chrome wordmark, bled to the edges */
 .footer__wordmark {
   margin: clamp(40px, 7vw, 86px) 0 0;
-  font-weight: 600;
+  font-family: var(--font-display);
   text-transform: uppercase;
-  letter-spacing: -0.04em;
-  line-height: 0.8;
-  font-size: clamp(56px, 15.5vw, 230px);
+  letter-spacing: 0.006em;
+  line-height: 0.78;
+  font-size: clamp(64px, 20vw, 300px);
   white-space: nowrap;
   user-select: none;
 }

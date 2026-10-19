@@ -68,15 +68,17 @@ export default function Highlights() {
     return () => controls.stop();
   }, [inView, reduceMotion, formation, expansion]);
 
-  const radiusRange = useMemo(() => {
-    const r = Math.min(540, Math.max(150, width * 0.37));
-    return [r * 0.4, r];
+  const cardSize = useMemo(() => {
+    const w = Math.min(352, Math.max(168, width * 0.26));
+    return { width: w, height: w * 1.4 };
   }, [width]);
 
-  const cardSize = useMemo(() => {
-    const w = Math.min(196, Math.max(116, width * 0.19));
-    return { width: w, height: w * 1.34 };
-  }, [width]);
+  // radius follows card width so the plates sit shoulder to shoulder around
+  // the ring rather than floating apart in the middle of the stage
+  const radiusRange = useMemo(() => {
+    const r = cardSize.width * 1.52;
+    return [r * 0.42, r];
+  }, [cardSize.width]);
 
   useEffect(() => {
     let raf;
@@ -100,7 +102,7 @@ export default function Highlights() {
           expansion: e,
           angleOffset,
           radiusRange,
-          scaleRange: [0.52, 1],
+          scaleRange: [0.68, 1],
         });
         node.style.transform = `translate(-50%, -50%) translate3d(${pose.x}px, 0, ${pose.z}px) rotateY(${pose.rotateY}deg) scale(${pose.scale})`;
         node.style.opacity = pose.opacity;
@@ -133,55 +135,56 @@ export default function Highlights() {
   };
 
   return (
-    <section className="section highlights" id="highlights" ref={sectionRef}>
-      <div className="section-inner">
-        <div className="highlights__head">
+    <section className="highlights" id="highlights" ref={sectionRef}>
+      <div className="section">
+        <div className="section-inner highlights__head">
           <div>
             <span className="mono">02 — What happens</span>
             <h2 className="highlights__title">Where the two days go</h2>
           </div>
           <p className="highlights__blurb">
-            Eight blocks across Saturday and Sunday. Pick a track or move
-            between all of them — nothing is locked.
+            Eight blocks across Saturday and Sunday. Pick a track and stay in
+            it, or move between all four — nothing is locked, and nothing
+            clashes with the sprint.
           </p>
         </div>
+      </div>
 
-        <div className="highlights__stage-wrap">
-          <div
-            className="reel-stage"
-            ref={stageRef}
-            onPointerDown={onPointerDown}
-            onPointerMove={onPointerMove}
-            onPointerUp={onPointerUp}
-            onPointerLeave={onPointerUp}
-          >
-            <div className="reel-ring" ref={ringRef}>
-              {ACTIVITIES.map((activity, i) => (
-                <a
-                  key={activity.label}
-                  href="#register"
-                  className={`reel-card ${i % 4 === 0 ? "reel-card--chrome" : ""}`}
-                  ref={(node) => {
-                    cardRefs.current[i] = node;
-                  }}
-                  style={{ width: cardSize.width, height: cardSize.height }}
-                >
-                  <span className="reel-card__index">
-                    {String(i + 1).padStart(2, "0")}
-                  </span>
-                  <span className="reel-card__body">
-                    <span className="reel-card__label">{activity.label}</span>
-                    <span className="reel-card__note">{activity.note}</span>
-                  </span>
-                </a>
-              ))}
-            </div>
+      <div className="highlights__stage-wrap">
+        <div
+          className="reel-stage"
+          ref={stageRef}
+          onPointerDown={onPointerDown}
+          onPointerMove={onPointerMove}
+          onPointerUp={onPointerUp}
+          onPointerLeave={onPointerUp}
+        >
+          <div className="reel-ring" ref={ringRef}>
+            {ACTIVITIES.map((activity, i) => (
+              <a
+                key={activity.label}
+                href="#register"
+                className={`reel-card ${i % 4 === 0 ? "reel-card--chrome" : ""}`}
+                ref={(node) => {
+                  cardRefs.current[i] = node;
+                }}
+                style={{ width: cardSize.width, height: cardSize.height }}
+              >
+                <span className="reel-card__index">
+                  {String(i + 1).padStart(2, "0")}
+                </span>
+                <span className="reel-card__body">
+                  <span className="reel-card__label">{activity.label}</span>
+                  <span className="reel-card__note">{activity.note}</span>
+                </span>
+              </a>
+            ))}
           </div>
-
-          <Annotation mark="up" className="highlights__note" delay={0.3}>
-            grab it, spin it
-          </Annotation>
         </div>
+
+        <Annotation mark="up" className="highlights__note" delay={0.3}>
+          grab it, spin it
+        </Annotation>
       </div>
     </section>
   );

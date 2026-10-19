@@ -37,7 +37,7 @@ export default function Register() {
     <section className="section register" id="register">
       <div className="section-inner register__inner">
         <div className="register__copy">
-          <span className="mono">03 — Admission</span>
+          <span className="mono">05 — Admission</span>
           <h2 className="register__title">Claim your pass</h2>
           <p className="register__body">
             Free for IGDTUW students, with a limited block of guest seats for

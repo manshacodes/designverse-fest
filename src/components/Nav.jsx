@@ -2,7 +2,9 @@ import { useState } from "react";
 import "./Nav.css";
 
 const LINKS = [
-  { href: "#highlights", label: "The two days" },
+  { href: "#highlights", label: "What happens" },
+  { href: "#schedule", label: "Schedule" },
+  { href: "#voices", label: "Speakers" },
   { href: "#register", label: "Pass" },
 ];
 

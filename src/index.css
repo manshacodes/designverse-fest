@@ -1,5 +1,6 @@
-@import "@fontsource-variable/geist";
-@import "@fontsource-variable/geist-mono";
+@import "@fontsource/anton";
+@import "@fontsource-variable/archivo";
+@import "@fontsource-variable/jetbrains-mono";
 @import "@fontsource/caveat/600.css";
 
 :root {
@@ -20,8 +21,9 @@
   /* the one non-metal accent: a hot filament orange, used almost nowhere */
   --filament: #ff5324;
 
-  --font-sans: "Geist Variable", "Helvetica Neue", Arial, sans-serif;
-  --font-mono: "Geist Mono Variable", ui-monospace, monospace;
+  --font-display: "Anton", Impact, "Haettenschweiler", sans-serif;
+  --font-sans: "Archivo Variable", "Helvetica Neue", Arial, sans-serif;
+  --font-mono: "JetBrains Mono Variable", ui-monospace, monospace;
   --font-hand: "Caveat", cursive;
 
   /* polished chrome — hard banding is what reads as metal */
@@ -122,8 +124,9 @@ h1,
 h2,
 h3 {
   margin: 0;
-  font-weight: 500;
-  letter-spacing: -0.022em;
+  font-family: var(--font-display);
+  font-weight: 400;
+  letter-spacing: 0.008em;
   text-transform: uppercase;
   text-wrap: balance;
 }

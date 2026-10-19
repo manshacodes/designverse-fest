@@ -2,11 +2,11 @@ import { motion } from "framer-motion";
 import ScrambleText from "./ScrambleText";
 import InfoKeyword from "./InfoKeyword";
 import Annotation from "./Annotation";
-import MetalPass from "./MetalPass";
+import MetalTicket from "./MetalTicket";
 import "./Hero.css";
 
 const rise = {
-  initial: { opacity: 0, y: 18 },
+  initial: { opacity: 0, y: 16 },
   animate: { opacity: 1, y: 0 },
 };
 
@@ -16,7 +16,7 @@ export default function Hero() {
       <div className="section-inner">
         <div className="hero__slug">
           <span className="mono">ED. 01 — IGDTUW, DELHI</span>
-          <span className="mono">14–15 MAR 2026 · 10:00–18:00</span>
+          <span className="mono">14–15 MAR 2026 · 10:00–18:00 IST</span>
         </div>
 
         <h1 className="hero__title chrome-text">
@@ -28,16 +28,18 @@ export default function Hero() {
             <motion.p
               className="hero__line"
               {...rise}
-              transition={{ duration: 0.55, ease: [0.16, 1, 0.3, 1], delay: 0.2 }}
+              transition={{ duration: 0.5, ease: [0.16, 1, 0.3, 1], delay: 0.18 }}
             >
-              Two days. One campus. Every discipline of design.
+              Two days. One campus.<br />Every discipline of design.
             </motion.p>
 
             <motion.p
               className="hero__intro"
               {...rise}
-              transition={{ duration: 0.55, ease: [0.16, 1, 0.3, 1], delay: 0.32 }}
+              transition={{ duration: 0.5, ease: [0.16, 1, 0.3, 1], delay: 0.3 }}
             >
+              A student design &amp; innovation fest run by the Design &amp;
+              Innovation Society at IGDTUW.{" "}
               <InfoKeyword
                 stat="6 hands-on workshops"
                 detail="Figma systems, motion, branding, prototyping. Bring a laptop."
@@ -58,30 +60,53 @@ export default function Hero() {
               >
                 a 24-hour build sprint
               </InfoKeyword>
-              . Open to every year, every branch.
+              . Open to every year, every branch — no portfolio required.
             </motion.p>
 
             <motion.div
               className="hero__actions"
               {...rise}
-              transition={{ duration: 0.55, ease: [0.16, 1, 0.3, 1], delay: 0.44 }}
+              transition={{ duration: 0.5, ease: [0.16, 1, 0.3, 1], delay: 0.42 }}
             >
               <a href="#register" className="btn btn--metal">
                 Claim your pass
               </a>
-              <a href="#highlights" className="btn btn--ghost">
-                See the two days
+              <a href="#schedule" className="btn btn--ghost">
+                See the schedule
               </a>
             </motion.div>
+
+            <motion.dl
+              className="hero__facts"
+              {...rise}
+              transition={{ duration: 0.5, ease: [0.16, 1, 0.3, 1], delay: 0.54 }}
+            >
+              <div>
+                <dt className="mono">Admission</dt>
+                <dd>Free</dd>
+              </div>
+              <div>
+                <dt className="mono">Seats</dt>
+                <dd>250</dd>
+              </div>
+              <div>
+                <dt className="mono">Tracks</dt>
+                <dd>Four</dd>
+              </div>
+              <div>
+                <dt className="mono">Edition</dt>
+                <dd>First</dd>
+              </div>
+            </motion.dl>
           </div>
 
           <div className="hero__object">
-            <MetalPass />
-            <Annotation mark="sw" className="hero__note hero__note--pass" delay={0.6}>
+            <MetalTicket drop />
+            <Annotation mark="sw" className="hero__note hero__note--pass" delay={1.2}>
               milled, not printed
             </Annotation>
-            <Annotation mark="up" className="hero__note hero__note--move" delay={0.9}>
-              move your cursor
+            <Annotation mark="up" className="hero__note hero__note--move" delay={1.5}>
+              move your cursor over it
             </Annotation>
           </div>
         </div>

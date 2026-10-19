@@ -1,6 +1,7 @@
 .highlights {
-  padding-block: clamp(56px, 9vw, 110px);
+  padding-block: clamp(56px, 9vw, 112px);
   border-top: 1px solid var(--hairline);
+  overflow: clip;
 }
 
 .highlights__head {
@@ -11,39 +12,49 @@
 }
 
 .highlights__title {
-  margin-top: 10px;
-  font-size: clamp(30px, 5.2vw, 62px);
-  line-height: 0.92;
-  letter-spacing: -0.03em;
+  margin-top: 12px;
+  font-size: clamp(34px, 7vw, 92px);
+  line-height: 0.86;
+  letter-spacing: 0.008em;
   color: var(--silver);
 }
 
 .highlights__blurb {
   font-size: 14.5px;
-  line-height: 1.65;
+  line-height: 1.68;
   color: var(--silver-dim);
-  max-width: 42ch;
+  max-width: 44ch;
 }
 
+/* full-bleed: the ring runs edge to edge, cards sweep off-screen */
 .highlights__stage-wrap {
   position: relative;
-  margin-top: clamp(40px, 6vw, 76px);
+  width: 100vw;
+  margin-left: calc(50% - 50vw);
+  margin-top: clamp(44px, 6vw, 82px);
 }
 
 .highlights__note {
   position: absolute;
   left: 50%;
   translate: -50% 0;
-  bottom: -18px;
+  bottom: -14px;
   z-index: 4;
 }
 
+/* the short perspective is the whole effect — it puts you inside the ring */
 .reel-stage {
   position: relative;
   width: 100%;
-  height: clamp(300px, 42vw, 470px);
-  perspective: 1200px;
+  height: clamp(360px, 45vw, 640px);
+  perspective: clamp(340px, 30vw, 440px);
+  perspective-origin: 50% 48%;
   touch-action: pan-y;
+  cursor: grab;
+}
+
+.reel-stage:active {
+  cursor: grabbing;
 }
 
 .reel-ring {
@@ -60,7 +71,7 @@
   display: flex;
   flex-direction: column;
   justify-content: space-between;
-  padding: 14px;
+  padding: 16px;
   border-radius: 3px;
   text-decoration: none;
   backface-visibility: hidden;
@@ -70,11 +81,10 @@
   box-shadow:
     inset 0 1px 0 rgba(255, 255, 255, 0.09),
     0 0 0 1px rgba(255, 255, 255, 0.05),
-    0 26px 50px -20px rgba(0, 0, 0, 0.95);
+    0 30px 60px -22px rgba(0, 0, 0, 0.98);
   will-change: transform;
 }
 
-/* brushed grain + a fixed specular band so each plate reads as metal */
 .reel-card::before {
   content: "";
   position: absolute;
@@ -82,9 +92,9 @@
   background:
     linear-gradient(
       104deg,
-      rgba(255, 255, 255, 0) 34%,
-      rgba(255, 255, 255, 0.16) 48%,
-      rgba(255, 255, 255, 0) 60%
+      rgba(255, 255, 255, 0) 32%,
+      rgba(255, 255, 255, 0.17) 47%,
+      rgba(255, 255, 255, 0) 61%
     ),
     repeating-linear-gradient(
       96deg,
@@ -96,19 +106,20 @@
 
 .reel-card--chrome {
   background: var(--chrome);
-  color: #14181a;
+  color: #121618;
   box-shadow:
-    0 0 0 1px rgba(255, 255, 255, 0.22),
-    0 26px 50px -20px rgba(0, 0, 0, 0.95);
+    0 0 0 1px rgba(255, 255, 255, 0.24),
+    0 30px 60px -22px rgba(0, 0, 0, 0.98);
 }
 
 .reel-card__index {
   position: relative;
   z-index: 2;
-  font-family: var(--font-mono);
-  font-size: 10.5px;
-  letter-spacing: 0.16em;
-  opacity: 0.68;
+  font-family: var(--font-display);
+  font-size: clamp(30px, 3.4vw, 46px);
+  line-height: 0.84;
+  letter-spacing: 0.01em;
+  opacity: 0.42;
 }
 
 .reel-card__body {
@@ -116,22 +127,23 @@
   z-index: 2;
   display: flex;
   flex-direction: column;
-  gap: 5px;
+  gap: 7px;
 }
 
 .reel-card__label {
-  font-size: clamp(13px, 1.5vw, 15.5px);
-  font-weight: 600;
-  line-height: 1.1;
+  font-family: var(--font-display);
+  font-size: clamp(16px, 1.75vw, 23px);
+  line-height: 0.94;
+  letter-spacing: 0.012em;
   text-transform: uppercase;
-  letter-spacing: -0.015em;
 }
 
 .reel-card__note {
   font-family: var(--font-mono);
   font-size: 10px;
-  letter-spacing: 0.04em;
-  opacity: 0.72;
+  font-weight: 500;
+  letter-spacing: 0.05em;
+  opacity: 0.74;
 }
 
 @media (max-width: 860px) {
@@ -143,7 +155,7 @@
 
 @media (max-width: 560px) {
   .reel-stage {
-    height: 240px;
-    perspective: 760px;
+    height: 300px;
+    perspective: 320px;
   }
 }
