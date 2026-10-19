@@ -6,11 +6,45 @@
 
 .hero__slug {
   display: flex;
+  align-items: center;
   justify-content: space-between;
   gap: 16px;
   flex-wrap: wrap;
   padding-bottom: 13px;
   border-bottom: 1px solid var(--hairline);
+}
+
+.hero__slug .mono {
+  display: inline-flex;
+  align-items: center;
+  gap: 9px;
+}
+
+.hero__rule {
+  flex: 1;
+  min-width: 90px;
+  justify-content: center;
+}
+
+/* chrome sparkles drifting around the hero */
+.hero__spark {
+  position: absolute;
+  z-index: 4;
+}
+
+.hero__spark--a {
+  top: 16%;
+  right: 3%;
+}
+
+.hero__spark--b {
+  top: 54%;
+  left: 47%;
+}
+
+.hero__spark--c {
+  bottom: 12%;
+  left: 3%;
 }
 
 .hero__title {
@@ -24,6 +58,7 @@
 }
 
 .hero__grid {
+  position: relative;
   display: grid;
   grid-template-columns: 1fr 1fr;
   gap: clamp(32px, 5vw, 76px);

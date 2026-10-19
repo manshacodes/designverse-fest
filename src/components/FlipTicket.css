@@ -249,6 +249,26 @@
   pointer-events: none;
 }
 
+/* flat state: no perspective, no rotated planes, so the form hit-tests
+   like ordinary DOM instead of through a 3D projection */
+.ticket-stage.is-flat {
+  perspective: none;
+}
+
+.ticket.is-settled {
+  transform-style: flat;
+  transform: none;
+}
+
+.ticket.is-settled .ticket__face--back {
+  transform: none;
+  backface-visibility: visible;
+}
+
+.ticket.is-settled .ticket__face--front {
+  display: none;
+}
+
 /* ---- back: the form ---- */
 .ticket-form,
 .ticket-form__done {
@@ -363,8 +383,10 @@
 
 .tracks__chip input {
   position: absolute;
+  inset: 0;
   opacity: 0;
-  pointer-events: none;
+  margin: 0;
+  cursor: pointer;
 }
 
 .ticket-form__submit {

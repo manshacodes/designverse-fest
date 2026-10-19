@@ -18,6 +18,9 @@ export default function FlipTicket() {
   const cardRef = useRef(null);
 
   const [flipped, setFlipped] = useState(false);
+  // once the turn has landed we drop out of 3D entirely: hit-testing through a
+  // rotated, mirrored plane is unreliable and the form stops taking clicks
+  const [settled, setSettled] = useState(false);
   const [submitted, setSubmitted] = useState(false);
   const [code] = useState(makeCode);
   const [height, setHeight] = useState(270);
@@ -45,7 +48,19 @@ export default function FlipTicket() {
   );
 
   useEffect(() => {
-    flipY.set(flipped ? 180 : 0);
+    if (!flipped) {
+      setSettled(false);
+      flipY.set(0);
+      return undefined;
+    }
+    flipY.set(180);
+    const t = window.setTimeout(() => {
+      // jump (not animate) back to 0 as the face's own 180deg is removed in the
+      // same commit, so the card looks identical but is flat and clickable
+      flipY.jump(0);
+      setSettled(true);
+    }, 820);
+    return () => window.clearTimeout(t);
   }, [flipped, flipY]);
 
   // front is a ticket; the form side needs room, so the card grows as it turns
@@ -106,7 +121,7 @@ export default function FlipTicket() {
   };
 
   return (
-    <div className="ticket-stage" ref={stageRef}>
+    <div className={`ticket-stage ${settled ? "is-flat" : ""}`} ref={stageRef}>
       <motion.div
         className="ticket-drop"
         initial={{ x: 210, y: -330, rotate: 15, opacity: 0 }}
@@ -114,9 +129,11 @@ export default function FlipTicket() {
         transition={{ duration: 1, ease: [0.16, 1, 0.3, 1], delay: 0.25 }}
       >
         <motion.div
-          className={`ticket ${flipped ? "is-flipped" : ""}`}
+          className={`ticket ${flipped ? "is-flipped" : ""} ${
+            settled ? "is-settled" : ""
+          }`}
           ref={cardRef}
-          style={{ rotateX: tiltX, rotateY, height }}
+          style={settled ? { height } : { rotateX: tiltX, rotateY, height }}
         >
           {/* ---------- front: the pass ---------- */}
           <div className="ticket__face ticket__face--front">

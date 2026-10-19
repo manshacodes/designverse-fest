@@ -1,0 +1,141 @@
+.deco-defs {
+  position: absolute;
+  width: 0;
+  height: 0;
+  overflow: hidden;
+}
+
+/* ---- sparkle ---- */
+.sparkle {
+  display: block;
+  pointer-events: none;
+  filter: drop-shadow(0 2px 6px rgba(0, 0, 0, 0.6));
+}
+
+.sparkle--spin {
+  animation: sparkle-spin 14s linear infinite;
+}
+
+.sparkle--pulse {
+  animation: sparkle-pulse 5.5s var(--ease-crisp) infinite;
+}
+
+@keyframes sparkle-spin {
+  to {
+    transform: rotate(360deg);
+  }
+}
+
+@keyframes sparkle-pulse {
+  0%,
+  100% {
+    transform: scale(1) rotate(0deg);
+    opacity: 0.85;
+  }
+  50% {
+    transform: scale(1.18) rotate(22deg);
+    opacity: 1;
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .sparkle--spin,
+  .sparkle--pulse {
+    animation: none;
+  }
+}
+
+/* ---- crop marks ---- */
+.crop {
+  position: absolute;
+  inset: -18px;
+  pointer-events: none;
+}
+
+.crop__c {
+  position: absolute;
+  width: 16px;
+  height: 16px;
+}
+
+.crop__c::before,
+.crop__c::after {
+  content: "";
+  position: absolute;
+  background: var(--hairline-bright);
+}
+
+.crop__c::before {
+  width: 16px;
+  height: 1px;
+}
+
+.crop__c::after {
+  width: 1px;
+  height: 16px;
+}
+
+.crop__c--tl {
+  top: 0;
+  left: 0;
+}
+.crop__c--tr {
+  top: 0;
+  right: 0;
+}
+.crop__c--tr::before {
+  right: 0;
+}
+.crop__c--tr::after {
+  right: 0;
+}
+.crop__c--bl {
+  bottom: 0;
+  left: 0;
+}
+.crop__c--bl::before {
+  bottom: 0;
+}
+.crop__c--bl::after {
+  bottom: 0;
+}
+.crop__c--br {
+  bottom: 0;
+  right: 0;
+}
+.crop__c--br::before {
+  bottom: 0;
+  right: 0;
+}
+.crop__c--br::after {
+  bottom: 0;
+  right: 0;
+}
+
+/* ---- registration mark ---- */
+.regmark {
+  color: var(--silver-faint);
+  pointer-events: none;
+}
+
+/* ---- ruler ---- */
+.ruler {
+  display: flex;
+  align-items: flex-start;
+  gap: 6px;
+  height: 11px;
+  overflow: hidden;
+  pointer-events: none;
+}
+
+.ruler__t {
+  width: 1px;
+  height: 4px;
+  flex: none;
+  background: var(--hairline-bright);
+}
+
+.ruler__t--major {
+  height: 10px;
+  background: var(--silver-faint);
+}

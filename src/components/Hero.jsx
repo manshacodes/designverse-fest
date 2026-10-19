@@ -4,6 +4,7 @@ import InfoKeyword from "./InfoKeyword";
 import Annotation from "./Annotation";
 import FlipTicket from "./FlipTicket";
 import { openPass } from "./Admission";
+import { Sparkle, Ruler, RegMark } from "./Deco";
 import "./Hero.css";
 
 const rise = {
@@ -16,7 +17,10 @@ export default function Hero() {
     <section className="section hero" id="top">
       <div className="section-inner">
         <div className="hero__slug">
-          <span className="mono">ED. 01 — IGDTUW, DELHI</span>
+          <span className="mono">
+            <RegMark size={13} /> ED. 01 — IGDTUW, DELHI
+          </span>
+          <Ruler ticks={34} className="hero__rule" />
           <span className="mono">14–15 MAR 2026 · 10:00–18:00 IST</span>
         </div>
 
@@ -100,6 +104,10 @@ export default function Hero() {
               </div>
             </motion.dl>
           </div>
+
+          <Sparkle size={34} className="sparkle--pulse hero__spark hero__spark--a" />
+          <Sparkle size={19} className="sparkle--spin hero__spark hero__spark--b" />
+          <Sparkle size={13} className="sparkle--pulse hero__spark hero__spark--c" />
 
           <div className="hero__object" data-speed="1.12">
             <FlipTicket />
